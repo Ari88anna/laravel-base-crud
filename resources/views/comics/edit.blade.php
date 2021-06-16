@@ -5,7 +5,7 @@
 
     <section>
         <div class="container">
-            <h1>Crea un nuovo fumetto da aggiungere alla collection</h1>
+            <h1>modifica prodotto</h1>
 
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -17,43 +17,40 @@
                 </div>
             @endif
 
-            <form action="{{ route('comics.store') }}" method="post">
+            <form action="{{ route('comics.update', ['comic'=>$comic->id]) }}" method="post">
                 @csrf
-                @method('POST')
+                @method('PUT')
 
                 <div class="form-group">
                     <label for="title">Titolo</label>
-                    <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}">
+                    <input type="text" class="form-control" id="title" name="title" value="{{ $comic->title }}">
                 </div>
 
                 <div class="form-group">
                     <label for="writer">Autore</label>
-                    <input type="text" class="form-control" id="writer" name="writer" value="{{ old('writer') }}">
+                    <input type="text" class="form-control" id="writer" name="writer" value="{{ $comic->writer }}">
                 </div>
 
                 <div class="form-group">
                     <label for="price">Prezzo</label>
-                    <input type="text" class="form-control" id="price" name="price" value="{{ old('price') }}">
+                    <input type="text" class="form-control" id="price" name="price" value="{{ $comic->price }}">
                 </div>
 
                 <div class="form-group">
                     <label for="image">Immagine</label>
-                    <input type="text" class="form-control" id="image" name="image" value="{{ old('image') }}">
+                    <input type="text" class="form-control" id="image" name="image" value="{{ $comic->image }}">
                 </div>
 
                 <div class="form-group">
                     <label for="description">Trama</label>                    
-                    <textarea name="description" class="form-control" id="description" cols="30" rows="10" value="{{ old('description') }}"></textarea>
+                    <textarea name="description" class="form-control" id="description" cols="30" rows="10" value="{{ $comic->description }}"></textarea>
                 </div>
 
-                
+                <input type="submit" class="btn btn-primary" value="Modifica">
 
-                <input type="submit" class="btn btn-primary" value="salva fumetto">
             </form>
-
 
 
         </div>
     </section>
-
-@endsection
+@endsection   
