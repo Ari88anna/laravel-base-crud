@@ -40,11 +40,22 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' =>'required|min:3|max:255',
+            'writer'=>'required|min:3|max:100',
+            'price'=> 'required|numeric',
+            'image'=> 'required|max:255',
+        ]);
+
         $form_data =$request->all();
 
         $comic = new Comic();
         $comic->fill($form_data);
         $comic->save();
+
+        // se ci dice che l'id non esiste, possiamo provare:
+        // $last_comic = Comic::orderBy('id', 'desc')->first();
+        // e passare al return $last_comic->id
 
 
         return redirect()->route('comics.show', [
